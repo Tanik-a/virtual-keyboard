@@ -1,0 +1,39 @@
+.container{
+  max-width: 800px;
+  margin: 0 auto;
+}
+.title{
+  position: relative;
+  text-align: center;
+  color: #3ca1d9;
+  font-size: 3rem;
+  line-height: 1;
+  text-shadow: 3px 3px 2px #402d76;
+}
+.title::before{
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 80%;
+  height: 200%;
+  border-radius: 50%/30%;
+  border: 6px solid #3ca1d9;
+  border-left-color: transparent;
+  border-right-color: transparent;
+}
+.textarea{
+  width: 100%;
+}
+.keyboard{
+  padding: 5px;
+  border: 3px solid #943232;
+}
+.info{
+  padding: 15px;
+  font-size: 1.5rem;
+  text-align: center;
+  color: #943232;
+  border: 3px solid #943232;
+}
