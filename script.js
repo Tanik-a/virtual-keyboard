@@ -181,4 +181,15 @@ function printLetter(event){
 
 let keys = document.querySelectorAll('.key-btn');
 [...keys].forEach(item => item.addEventListener('click', printChar));
-document.addEventListener('keypress', printLetter)
+document.addEventListener('keypress', printLetter);
+
+//функциональность backspace
+document.querySelector('.key-backspace').addEventListener('click', () => {
+  textArea.value = textArea.value.substring(0, textArea.value.length - 2);
+})
+
+document.addEventListener('keydown', function (event){
+  if(event.keyCode === 8){
+    textArea.value = textArea.value.substring(0, textArea.value.length - 1);
+  }
+})
