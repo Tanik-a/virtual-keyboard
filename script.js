@@ -168,3 +168,17 @@ document.querySelectorAll('.keyboard .key-btn').forEach(function(element){
     this.classList.add('pressed');
   })
 })
+
+//печать букв в textarea
+function printChar(event){
+  const char = event.target.attributes.data.nodeValue;
+  textArea.value += String.fromCharCode(char);
+}
+function printLetter(event){
+  const letter = event.keyCode;
+  textArea.value += String.fromCharCode(letter);
+}
+
+let keys = document.querySelectorAll('.key-btn');
+[...keys].forEach(item => item.addEventListener('click', printChar));
+document.addEventListener('keypress', printLetter)
