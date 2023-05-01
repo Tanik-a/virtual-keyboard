@@ -27,15 +27,9 @@ line3.className = 'line3';
 line4.className = 'line4';
 line5.className = 'line5';
 
-
-// header.className = 'header';
-// main.className = 'main';
-// footer.className = 'footer';
-
 //adding content
 title.innerText = 'Virtual keyboard';
-info.innerText = `The virtual keyboard was created in operating system Windows.\n
-Switch languages: Ctrl+Alt (on the left)`;
+info.innerText = `The virtual keyboard was created in operating system Windows.`;
 
 //adding to page
 body.appendChild(container);
@@ -58,7 +52,7 @@ const keys1 = [96, 49, 50, 51, 52, 53, 54, 55, 56, 57, 48, 45, 61, 8]
 const keys2 = [9, 113, 119, 101, 114, 116, 121, 117, 105, 111, 112, 91, 93, 92, 127]
 const keys3 = [20, 97, 115, 100, 102, 103, 104, 106, 107, 108, 59, 39, 13]
 const keys4 = [16, 122, 120, 99, 118, 98, 110, 109, 44, 46, 47, 38, 16]
-const keys5 = [17, 91, 18, 32, 18, 37, 40, 39, 17]
+const keys5 = [17, 18, 32, 18, 37, 40, 39, 17]
 
 function createKeyboard(){
   let result1 = '';
@@ -73,7 +67,7 @@ function createKeyboard(){
         result1 = result1 + `<div class = "key-btn key-backspace" data = "` + keys1[i] + `">Backspace</div>`;
         break;
       default:
-        result1 = result1 + `<div class = "key-btn" data = "` + keys1[i] + `">` + String.fromCharCode(keys1[i]) + `</div>`;
+        result1 = result1 + `<div class = "key-btn key-upper" data = "` + keys1[i] + `">` + String.fromCharCode(keys1[i]) + `</div>`;
     }
   }
   for(let i = 0; i < keys2.length; i++){
@@ -85,7 +79,7 @@ function createKeyboard(){
         result2 = result2 + `<div class = "key-btn key-del" data = "` + keys2[i] + `">Del</div>`;
         break;
       default:
-        result2 = result2 + `<div class = "key-btn" data = "` + keys2[i] + `">` + String.fromCharCode(keys2[i]) + `</div>`;
+        result2 = result2 + `<div class = "key-btn key-upper" data = "` + keys2[i] + `">` + String.fromCharCode(keys2[i]) + `</div>`;
     }
   }
   for(let i = 0; i < keys3.length; i++){
@@ -97,7 +91,7 @@ function createKeyboard(){
         result3 = result3 + `<div class = "key-btn key-capslock" data = "` + keys3[i] + `">CapsLock</div>`;
         break;
       default:
-        result3 = result3 + `<div class = "key-btn" data = "` + keys3[i] + `">` + String.fromCharCode(keys3[i]) + `</div>`;
+        result3 = result3 + `<div class = "key-btn key-upper" data = "` + keys3[i] + `">` + String.fromCharCode(keys3[i]) + `</div>`;
       }
     }
   for(let i = 0; i < keys4.length; i++){
@@ -109,7 +103,7 @@ function createKeyboard(){
         result4 = result4 + `<div class = "key-btn key-shift" data = "` + keys4[i] + `">Shift</div>`;
         break;
       default:
-        result4 = result4 + `<div class = "key-btn" data = "` + keys4[i] + `">` + String.fromCharCode(keys4[i]) + `</div>`;
+        result4 = result4 + `<div class = "key-btn key-upper" data = "` + keys4[i] + `">` + String.fromCharCode(keys4[i]) + `</div>`;
       }
     }
     for(let i = 0; i < keys5.length; i++){
@@ -133,7 +127,7 @@ function createKeyboard(){
         result5 = result5 + `<div class = "key-btn key-arrow" data = "` + keys5[i] + `"><img class = "arrow-down" src="images/arrow.png"></div>`;
         break;
       default:
-        result5 = result5 + `<div class = "key-btn" data = "` + keys5[i] + `">` + String.fromCharCode(keys5[i]) + `</div>`;
+        result5 = result5 + `<div class = "key-btn key-upper" data = "` + keys5[i] + `">` + String.fromCharCode(keys5[i]) + `</div>`;
     }
   }
   document.querySelector('.line1').innerHTML = result1;
@@ -190,6 +184,56 @@ document.querySelector('.key-backspace').addEventListener('click', () => {
 
 document.addEventListener('keydown', function (event){
   if(event.keyCode === 8){
+    textArea.value = textArea.value.substring(0, textArea.value.length - 1);
+  }
+})
+
+//функциональность capslock
+document.querySelector('.key-capslock').addEventListener('click', function (event) {
+  this.classList.toggle('checked');
+  textArea.value = textArea.value.substring(0, textArea.value.length - 1);
+  if(this.classList.contains('checked')){
+    document.querySelectorAll('.key-upper').forEach(function(element){
+    element.classList.add('caps');
+
+    element.addEventListener('click', function (event){
+    console.log(event)
+    textArea.value = textArea.value.toUpperCase();
+    })
+  })
+  }else{
+
+    document.querySelectorAll('.key-upper').forEach(function(element){
+    element.classList.remove('caps');
+    element.addEventListener('click', function (event){
+    console.log(event)
+    textArea.value = textArea.value.toLowerCase();
+    })
+    })
+    }
+  })
+
+document.addEventListener('keydown', function (event){
+  if(event.keyCode === 20){
+    document.querySelectorAll('.key-upper').forEach(function(element){
+      element.classList.toggle('caps');
+      element.addEventListener('click', function (event){
+        textArea.value = textArea.value.toLowerCase();
+      })
+    })
+    document.querySelector('.key-capslock').classList.toggle('checked');
+    textArea.value = textArea.value.substring(0, textArea.value.length - 1);
+  }
+})
+document.addEventListener('keydown', function (event){
+  if(event.keyCode === 20){
+    document.querySelectorAll('.key-upper').forEach(function(element){
+      element.classList.toggle('caps');
+      element.addEventListener('keydown', function (event){
+        textArea.value = textArea.value.toLowerCase();
+      })
+    })
+    document.querySelector('.key-capslock').classList.toggle('checked');
     textArea.value = textArea.value.substring(0, textArea.value.length - 1);
   }
 })

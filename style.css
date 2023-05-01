@@ -85,7 +85,7 @@
   background-color: #7d9cad;
 }
 .key-space{
-  width: 330px;
+  width: 376px;
 }
 .key-arrow,
 .key-ctrl,
@@ -115,4 +115,11 @@ img{
   text-align: center;
   color: #943232;
   border: 3px solid #943232;
+}
+.caps{
+  text-transform: uppercase;
+}
+.checked{
+  background-color: #17465f;
+  color: #943232;
 }
